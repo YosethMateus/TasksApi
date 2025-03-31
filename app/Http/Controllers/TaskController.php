@@ -313,6 +313,29 @@ class TaskController extends Controller
             'files' => $files
         ]);
     }   
-    
+
+    public function finish($id)
+    {
+        $task = Task::find($id);
+
+        if (!$task) {
+            return response()->json([
+                'Mensaje' => 'Tarea no encontrada'
+            ], 404);
+        }
+
+        // Verificamos si el usuario tiene permiso para finalizar
+        $this->authorize('finish', $task);
+        
+        // Cambiar el estado de la tarea a 'completed'
+        $task->update([
+            'status' => 'completed'
+        ]);
+
+        return response()->json([
+            'message' => 'Tarea finalizada exitosamente',
+        ]);
+        
+    }
 
 }
