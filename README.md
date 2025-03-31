@@ -69,17 +69,20 @@ Esto instalará todas las dependencias necesarias definidas en el archivo compos
 Copia el archivo .env.example a .env para configurar las variables de entorno:
 Abre el archivo .env y configura las siguientes variables:
 
-DB_CONNECTION: mysql (o tu base de datos preferida).
-DB_HOST: 127.0.0.1 o la IP de tu servidor de base de datos.
-DB_PORT: 3306 (o el puerto que esté usando tu base de datos).
-DB_DATABASE: El nombre de la base de datos que deseas usar.
-DB_USERNAME: Tu nombre de usuario de base de datos.
-DB_PASSWORD: Tu contraseña de base de datos.
-MAIL_MAILER: smtp (o el servicio que uses para enviar correos).
-MAIL_HOST: El host del servicio de correo (ej. smtp.gmail.com).
-MAIL_PORT: El puerto del servicio de correo (ej. 587 para Gmail).
-MAIL_USERNAME: Tu correo electrónico.
-MAIL_PASSWORD: Tu contraseña de correo o la contraseña de aplicación (en el caso de Gmail).
+DB_CONNECTION: mysql
+
+DB_HOST: 127.0.0.1 (o la ip que se este utilizando)
+DB_PORT: 3306 (o el puerto que se este utilizando para tu base de datos)
+DB_DATABASE: nombre de la base de datos que vayas a utilizar
+DB_USERNAME: usuario de base de datos
+DB_PASSWORD: contraseña de base de datos
+MAIL_MAILER: smtp (o el servicio de correo que se este utilizando)
+MAIL_HOST: host de tu servicio de correo
+MAIL_PORT: puerto de tu servicio de correo
+MAIL_USERNAME: correo electrónico
+MAIL_PASSWORD: contraseña de aplicación 
+
+
 
 4. Generar la Clave de la Aplicación
 Ejecuta el siguiente comando para generar la clave de la aplicación:
