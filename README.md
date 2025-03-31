@@ -1,66 +1,93 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+TasksProject - API RESTful (Laravel 11)
+Descripción
+Este proyecto proporciona una API RESTful para la gestión de tareas. Permite crear, listar, editar, eliminar, comentar, hacer un seguimiento de tiempo, y adjuntar archivos a las tareas. Utiliza Laravel 11 con autenticación vía Laravel Sanctum, autorización mediante Policies y manejo de tareas con Soft Deletes para recuperación.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Requisitos del Sistema
+PHP 8.2 o superior.
+Composer: Para gestionar dependencias de PHP.
+Base de datos: MySQL o compatible.
 
-## About Laravel
+Funcionalidades:
+Autenticación
+Registro de usuario: POST /register
+Login de usuario: POST /login
+Logout de usuario: POST /logout (middleware: auth:sanctum)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Tareas
+Crear tarea: POST /tasks (middleware: auth:sanctum)
+Listar tareas: GET /tasks (middleware: auth:sanctum)
+Obtener tarea específica: GET /tasks/{id} (middleware: auth:sanctum)
+Asignar tarea: PUT /tasks/{id} (middleware: auth:sanctum)
+Eliminar tarea: DELETE /tasks/{id} (middleware: auth:sanctum)
+Restaurar tarea (soft delete): PATCH /tasks/{id}/restore (middleware: auth:sanctum)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Comentarios
+Agregar comentario a tarea: POST /tasks/{id}/comments (middleware: auth:sanctum)
+Listar comentarios de tarea: GET /tasks/{id}/comments (middleware: auth:sanctum)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Registro de tiempo
+Registrar tiempo en tarea: POST /tasks/{id}/time-log (middleware: auth:sanctum)
+Listar tiempos registrados en tarea: GET /tasks/{id}/time-log (middleware: auth:sanctum)
 
-## Learning Laravel
+Archivos
+Subir archivo a tarea: POST /tasks/{id}/upload (middleware: auth:sanctum)
+Listar archivos adjuntos a tarea: GET /tasks/{id}/files (middleware: auth:sanctum)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Autorización
+El acceso a las rutas está protegido mediante Laravel Sanctum, que proporciona un sistema de autenticación basada en tokens. Además, la autorización de acciones específicas sobre las tareas se maneja mediante Policies, asegurando que solo los usuarios autorizados puedan realizar ciertas operaciones, como agregar comentarios a tareas a las que no están asignados.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Soft Deletes
+El proyecto implementa Soft Deletes para permitir la recuperación de tareas eliminadas. Se puede restaurar una tarea eliminada con el endpoint PATCH /tasks/{id}/restore.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Envío de correos
+Cuando se asigna una tarea, se envía un correo electrónico al usuario responsable de la tarea. El correo es enviado usando el servicio de correo configurado en el archivo .env de Laravel. Se utiliza el sistema de notificaciones de Laravel para gestionar el envío.
 
-## Laravel Sponsors
+Dependencias
+Laravel 11
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Laravel Sanctum: Para la autenticación basada en tokens.
 
-### Premium Partners
+Soft Deletes: Para la recuperación de tareas eliminadas.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Policies de Laravel: Para manejar la autorización.
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Instalación
+Para instalar y ejecutar este proyecto en tu entorno local, sigue estos pasos:
 
-## Code of Conduct
+1. Clonar el Repositorio
+Clona el repositorio en tu máquina local usando Git:
+git clone <https://github.com/YosethMateus/TasksApi/>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Instalación de Dependencias
+Accede a la carpeta del proyecto y ejecuta el siguiente comando para instalar las dependencias de PHP:
+cd <TasksProject>
+composer install
+Esto instalará todas las dependencias necesarias definidas en el archivo composer.json.
 
-## Security Vulnerabilities
+3. Configuración del Entorno
+Copia el archivo .env.example a .env para configurar las variables de entorno:
+Abre el archivo .env y configura las siguientes variables:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+DB_CONNECTION: mysql (o tu base de datos preferida).
+DB_HOST: 127.0.0.1 o la IP de tu servidor de base de datos.
+DB_PORT: 3306 (o el puerto que esté usando tu base de datos).
+DB_DATABASE: El nombre de la base de datos que deseas usar.
+DB_USERNAME: Tu nombre de usuario de base de datos.
+DB_PASSWORD: Tu contraseña de base de datos.
+MAIL_MAILER: smtp (o el servicio que uses para enviar correos).
+MAIL_HOST: El host del servicio de correo (ej. smtp.gmail.com).
+MAIL_PORT: El puerto del servicio de correo (ej. 587 para Gmail).
+MAIL_USERNAME: Tu correo electrónico.
+MAIL_PASSWORD: Tu contraseña de correo o la contraseña de aplicación (en el caso de Gmail).
 
-## License
+4. Generar la Clave de la Aplicación
+Ejecuta el siguiente comando para generar la clave de la aplicación:
+php artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Ejecutar Migraciones
+php artisan migrate
+Esto ejecutará las migraciones de Laravel y creará las tablas necesarias en la base de datos.
+
+7. Probar la API
+Puedes utilizar herramientas como Postman para probar la API. Asegúrate de enviar los tokens de autenticación obtenidos a través de la ruta login para las rutas que requieren autenticación.
